@@ -15,6 +15,8 @@ export interface GitHubConfig {
   branch: string;
   path: string;
   token: string;
+  /** Passphrase that encrypts data.json. Same on every device; never sent anywhere. */
+  key: string;
   role: Role;
   /** Who uses this device: signs the reviews. */
   name?: string;
@@ -34,7 +36,10 @@ const KEY = 'ristoview.config';
 export function loadConfig(): DeviceConfig | null {
   try {
     const raw = localStorage.getItem(KEY);
-    return raw ? (JSON.parse(raw) as DeviceConfig) : null;
+    const config = raw ? (JSON.parse(raw) as DeviceConfig) : null;
+    // Devices set up before encryption existed have no key: they go through setup again.
+    if (config?.mode === 'github' && !config.key) return null;
+    return config;
   } catch {
     return null;
   }

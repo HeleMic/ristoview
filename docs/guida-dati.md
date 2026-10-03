@@ -15,6 +15,9 @@ API di GitHub usando un **token personale** salvato solo sul dispositivo.
 
 Ogni salvataggio è un **commit**: hai lo storico completo di ogni modifica, gratis.
 
+Il file è **cifrato** con una chiave che scegliete voi (vedi [sezione 3](#3-collega-lapp)): anche chi riuscisse a
+leggere il repo vedrebbe solo dati illeggibili. La chiave non viene mai inviata a GitHub né salvata nel codice.
+
 ---
 
 ## 1. Crea il repo dei dati
@@ -74,8 +77,24 @@ cose:
 | Questo dispositivo è di… | **Lui** o **Lei**. Non si cambia più: per cambiarlo bisogna scollegare il dispositivo e rifare l'accesso |
 | Il tuo nome | firma le recensioni scritte da questo dispositivo |
 | Token | `github_pat_…`, resta solo in questo browser (`localStorage`) |
+| Chiave | frase segreta di almeno 8 caratteri, **uguale su tutti e due i telefoni**; resta solo in questo browser |
 
-Premi **Entra**: l'app verifica il token, legge `data.json` (o lo crea) e sei operativo.
+Premi **Entra**: l'app verifica il token, prova a decifrare `data.json` con la chiave (o lo crea, se non c'è ancora) e
+sei operativo. Con una chiave diversa da quella usata dall'altro telefono l'accesso viene rifiutato con
+"Chiave sbagliata", prima di scrivere qualsiasi cosa.
+
+### La chiave
+
+- Sceglietela **una volta** e usate la stessa su entrambi i telefoni. Una frase di 4-5 parole è più forte e più facile
+  da ricordare di una password corta.
+- Conservatela nel gestore password: **se la perdete, i dati sul repo non si possono più leggere**. Nessuno, nemmeno
+  GitHub, può recuperarla. (I dati restano leggibili sui telefoni già collegati, che ne hanno una copia locale: da lì
+  potete fare **Esporta JSON**.)
+- Come funziona: dalla chiave si ricava una chiave AES-256 con PBKDF2-SHA256 (600.000 iterazioni, salt casuale salvato
+  nel file); il contenuto è cifrato con AES-GCM, che rileva anche qualsiasi modifica al file.
+- Cosa resta visibile a chi legge il repo: solo che il file esiste, la sua dimensione e le date dei commit. I messaggi
+  dei commit sono generici (`ristoview: aggiornamento`) e non contengono nomi di ristoranti.
+- Il backup **Esporta JSON** e la cache locale del telefono sono **in chiaro**: il backup custoditelo voi.
 
 ### Cosa vede chi
 
@@ -111,7 +130,7 @@ fatto per sbaglio si può sempre annullare ripristinando una versione precedente
 ### Vedere lo storico
 
 Su GitHub apri `ristoview-data` → `data.json` → **History**. Ogni salvataggio dell'app è un commit con un messaggio
-tipo `ristoview: nuova recensione «Da Mario»`.
+generico (`ristoview: aggiornamento`): il contenuto è cifrato, quindi le differenze tra versioni non sono leggibili.
 
 ### Ripristinare una versione precedente
 
@@ -139,14 +158,14 @@ L'app si accorge della nuova versione al successivo avvio o premendo **Sincroniz
 
 ### Modificare i dati a mano
 
-Puoi modificare `data.json` direttamente su GitHub, ma:
+Il file su GitHub è cifrato, quindi non si modifica più dal sito di GitHub. Per correggere qualcosa a mano:
 
-- deve restare **JSON valido** (attenzione a virgole e virgolette);
-- non cambiare gli `id`: collegano recensioni, ristoranti e regali;
-- le date sono stringhe ISO (`"2026-10-03"` o `"2026-10-03T20:30:00.000Z"`); il mese del regalo è `"2026-10"`.
+1. dall'app **Impostazioni → Esporta JSON** (in chiaro);
+2. modifica il file restando in **JSON valido**, senza cambiare gli `id` (collegano recensioni, ristoranti e regali);
+3. **Importa JSON**: i dati vengono uniti a quelli esistenti e salvati di nuovo cifrati.
 
-Se l'app trova un file non valido, non lo sovrascrive: mostra un errore e lavora sulla copia locale finché non lo
-correggi.
+Se l'app trova su GitHub un file non valido o con una chiave diversa, non lo sovrascrive: mostra un errore e lavora
+sulla copia locale.
 
 ### Backup extra
 
@@ -156,6 +175,21 @@ esistenti.
 ---
 
 ## 5. Struttura di `data.json`
+
+Su GitHub il file contiene solo la "busta" cifrata:
+
+```jsonc
+{
+  "ristoview": "encrypted",
+  "v": 1,
+  "kdf": { "name": "PBKDF2", "hash": "SHA-256", "iterations": 600000, "salt": "…" },
+  "cipher": "AES-GCM",
+  "iv": "…",
+  "data": "…"                       // il JSON qui sotto, cifrato
+}
+```
+
+Una volta decifrato (e nel backup **Esporta JSON**) il contenuto è:
 
 ```jsonc
 {
@@ -214,7 +248,8 @@ calcola.
 | **Repository non trovato** (404) | il token non include `ristoview-data`, o è stato generato da un altro account | nel token verifica *Only select repositories* → `ristoview-data` |
 | **Permesso negato** (403) | il token ha *Contents: Read-only* | modifica il token → *Contents: Read and write* |
 | **Troppe richieste** (403/429) | limite API (5.000/ora: praticamente impossibile da raggiungere) | aspetta qualche minuto |
-| **File dati non valido** | `data.json` modificato a mano con un errore | correggilo su GitHub o ripristina una versione precedente |
+| **File dati non valido** | `data.json` modificato a mano con un errore | ripristina una versione precedente |
+| **Chiave sbagliata** | chiave diversa da quella usata dall'altro telefono (attenzione a maiuscole e spazi) | inserisci la stessa chiave dell'altro telefono |
 
 ### Revocare un token
 

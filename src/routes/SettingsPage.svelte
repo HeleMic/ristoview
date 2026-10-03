@@ -112,6 +112,7 @@
       <dl class="repo">
         <div><dt>Repository</dt><dd>{gh.owner}/{gh.repo}</dd></div>
         <div><dt>File</dt><dd>{gh.path} su {gh.branch}</dd></div>
+        <div><dt>Cifratura</dt><dd>attiva (AES-256), la chiave resta su questo dispositivo</dd></div>
       </dl>
       <div class="row">
         <button class="btn btn-ghost btn-sm" onclick={() => store.pull()}><Icon name="refresh" size={16} /> Sincronizza ora</button>

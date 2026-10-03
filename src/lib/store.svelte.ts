@@ -1,3 +1,4 @@
+import { decode, encrypt } from './crypto';
 import { mergeData, normalizeData } from './merge';
 import { clearCache, readCache, writeCache } from './storage/cache';
 import { clearConfig, loadConfig, saveConfig, type DeviceConfig, type GitHubConfig } from './storage/config';
@@ -9,11 +10,20 @@ export type SyncStatus = 'idle' | 'syncing' | 'saved' | 'offline' | 'local' | 'e
 const PUSH_DELAY_MS = 800;
 const PULL_THROTTLE_MS = 30_000;
 
+/** Commit messages are public to anyone who can read the repo history: they never carry content. */
 function commitMessage(messages: string[]): string {
-  const unique = [...new Set(messages)];
-  if (unique.length === 0) return 'ristoview: aggiornamento';
-  if (unique.length === 1) return `ristoview: ${unique[0]}`;
-  return `ristoview: ${unique[0]} (+${unique.length - 1})`;
+  const n = messages.length;
+  return n > 1 ? `ristoview: aggiornamento (${n} modifiche)` : 'ristoview: aggiornamento';
+}
+
+/** Decrypts (when needed) and validates the file read from GitHub. */
+async function parseRemote(text: string, c: GitHubConfig): Promise<{ data: AppData; salt?: string }> {
+  const { plain, salt } = await decode(text, c.key);
+  try {
+    return { data: normalizeData(JSON.parse(plain)), salt };
+  } catch (e) {
+    throw new Error(`Il file ${c.path} su GitHub non è valido: ${(e as Error).message} Lavoro sulla copia locale.`);
+  }
 }
 
 class AppStore {
@@ -27,6 +37,8 @@ class AppStore {
   error = $state<string | null>(null);
 
   private sha: string | null = null;
+  /** Salt of the encrypted file on GitHub, reused on save. A new one is harmless: it travels in the file. */
+  private salt: string | undefined;
   private dirty = false;
   private pending: string[] = [];
   /** Bumped on every local edit, to tell whether edits landed while a request was in flight. */
@@ -63,7 +75,12 @@ class AppStore {
 
   /** Tests the configuration against GitHub, then adopts it and loads the remote data. */
   async connect(config: DeviceConfig): Promise<void> {
-    if (config.mode === 'github') await checkRepo(config);
+    if (config.mode === 'github') {
+      await checkRepo(config);
+      // A wrong key must stop setup here, before this device writes anything.
+      const remote = await readFile(config);
+      if (remote) this.salt = (await parseRemote(remote.text, config)).salt;
+    }
     saveConfig(config);
     this.config = config;
     // Local-only data (if any) gets merged into the repo on first contact.
@@ -103,6 +120,7 @@ class AppStore {
     this.config = null;
     this.data = emptyData();
     this.sha = null;
+    this.salt = undefined;
     this.dirty = false;
     this.pending = [];
     this.status = 'idle';
@@ -155,13 +173,8 @@ class AppStore {
         await this.flush();
         return;
       }
-      let parsed: AppData;
-      try {
-        parsed = normalizeData(JSON.parse(remote.text));
-      } catch (e) {
-        this.fail(`Il file ${c.path} su GitHub non è valido: ${(e as Error).message} Lavoro sulla copia locale.`);
-        return;
-      }
+      const { data: parsed, salt } = await parseRemote(remote.text, c);
+      this.salt = salt;
       if (this.dirty) {
         this.data = mergeData($state.snapshot(this.data) as AppData, parsed);
         this.sha = remote.sha;
@@ -203,9 +216,10 @@ class AppStore {
     for (let attempt = 0; attempt < 3; attempt++) {
       const revision = this.revision;
       const sent = this.pending.length;
-      const text = `${JSON.stringify($state.snapshot(this.data), null, 2)}\n`;
       try {
-        this.sha = await writeFile(c, text, this.sha, commitMessage(this.pending));
+        const sealed = await encrypt(JSON.stringify($state.snapshot(this.data)), c.key, this.salt);
+        this.salt = sealed.salt;
+        this.sha = await writeFile(c, sealed.text, this.sha, commitMessage(this.pending));
         this.pending = this.pending.slice(sent);
         if (this.revision === revision) this.dirty = false;
         await this.persist();
@@ -219,9 +233,11 @@ class AppStore {
           if (remote) {
             let parsed: AppData;
             try {
-              parsed = normalizeData(JSON.parse(remote.text));
+              const result = await parseRemote(remote.text, c);
+              parsed = result.data;
+              this.salt = result.salt;
             } catch (err) {
-              this.fail(`Il file ${c.path} su GitHub non è valido: ${(err as Error).message} Lavoro sulla copia locale.`);
+              this.handle(err);
               return;
             }
             this.data = mergeData($state.snapshot(this.data) as AppData, parsed);

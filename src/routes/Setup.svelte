@@ -13,20 +13,25 @@
 
   let name = $state('');
   let token = $state('');
+  let key = $state('');
   let role = $state<Role>('lei');
   let busy = $state(false);
   let error = $state('');
 
   async function connect(e: SubmitEvent) {
     e.preventDefault();
-    if (!name.trim() || !token.trim()) {
-      error = 'Servono il nome e il token.';
+    if (!name.trim() || !token.trim() || !key) {
+      error = 'Servono nome, token e chiave.';
+      return;
+    }
+    if (key.length < 8) {
+      error = 'La chiave deve avere almeno 8 caratteri.';
       return;
     }
     busy = true;
     error = '';
     try {
-      await store.connect({ mode: 'github', ...DATA_REPO, token: token.trim(), role, name: name.trim() });
+      await store.connect({ mode: 'github', ...DATA_REPO, token: token.trim(), key, role, name: name.trim() });
       onconnected();
     } catch (err) {
       error = err instanceof GitHubError || err instanceof Error ? err.message : String(err);
@@ -51,7 +56,7 @@
         <Dog breed="pinscher" size={86} look={{ x: -0.6, y: 0.2 }} tilt={6} />
       </div>
       <h1 class="script logo">ristoview</h1>
-      <p class="tag">Ciao! Due cose e siamo pronti.</p>
+      <p class="tag">Ciao! Tre cose e siamo pronti.</p>
     </div>
 
     <form onsubmit={connect} novalidate>
@@ -72,11 +77,16 @@
         <span>Token</span>
         <input class="input" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" bind:value={token} />
       </label>
+      <label class="field">
+        <span>Chiave</span>
+        <input class="input" type="password" autocomplete="new-password" spellcheck="false" placeholder="Almeno 8 caratteri" bind:value={key} />
+        <span class="hint">Uguale su tutti e due i telefoni. Cifra i dati e non lascia mai questo dispositivo.</span>
+      </label>
 
       <p class="error" role="alert">{error}</p>
 
       <button class="btn btn-ribbon" type="submit" disabled={busy}>
-        {busy ? 'Controllo il token…' : 'Entra'}
+        {busy ? 'Controllo token e chiave…' : 'Entra'}
       </button>
       {#if import.meta.env.DEV}
         <button type="button" class="link center" onclick={tryLocal}>Prova in locale (solo sviluppo)</button>
