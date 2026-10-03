@@ -51,7 +51,8 @@ export interface Review {
   bill?: number;
   people?: number;
   notes?: string;
-  wouldReturn?: boolean;
+  /** true = sì, false = una volta basta, 'maybe' = forse. */
+  wouldReturn?: boolean | 'maybe';
   createdAt: string;
   updatedAt: string;
 }

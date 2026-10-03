@@ -31,7 +31,12 @@
   let bill = $state<number | null>(existing?.bill ?? null);
   let people = $state<number>(existing?.people ?? 2);
   let notes = $state(existing?.notes ?? '');
-  let wouldReturn = $state<boolean | undefined>(existing?.wouldReturn);
+  let wouldReturn = $state<boolean | 'maybe' | undefined>(existing?.wouldReturn);
+  const RETURN_OPTIONS = [
+    { value: true, label: 'Sì, di sicuro' },
+    { value: 'maybe', label: 'Forse' },
+    { value: false, label: 'Una volta basta' },
+  ] as const;
   let nameError = $state('');
 
   const match = $derived(fixedRestaurant ?? (name.trim() ? findRestaurantByName(name) : undefined));
@@ -208,14 +213,17 @@
     <fieldset>
       <legend class="section-title">Ci torneremmo?</legend>
       <div class="choice" role="radiogroup" aria-label="Ci torneremmo?">
-        <label class:on={wouldReturn === true}>
-          <input type="radio" name="ret" checked={wouldReturn === true} onclick={() => (wouldReturn = wouldReturn === true ? undefined : true)} />
-          Sì, di sicuro
-        </label>
-        <label class:on={wouldReturn === false}>
-          <input type="radio" name="ret" checked={wouldReturn === false} onclick={() => (wouldReturn = wouldReturn === false ? undefined : false)} />
-          Una volta basta
-        </label>
+        {#each RETURN_OPTIONS as opt (opt.label)}
+          <label class:on={wouldReturn === opt.value}>
+            <input
+              type="radio"
+              name="ret"
+              checked={wouldReturn === opt.value}
+              onclick={() => (wouldReturn = wouldReturn === opt.value ? undefined : opt.value)}
+            />
+            {opt.label}
+          </label>
+        {/each}
       </div>
     </fieldset>
 

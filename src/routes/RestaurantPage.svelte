@@ -30,7 +30,7 @@
       (restaurant ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.name)}` : undefined),
   );
 
-  const RETURN_LABEL = { true: 'Sì, ci torniamo', false: 'Una volta basta' } as const;
+  const RETURN_LABEL = { true: 'Sì, ci torniamo', maybe: 'Forse ci torniamo', false: 'Una volta basta' } as const;
 
   function remove() {
     deleteRestaurant(id);
@@ -129,7 +129,7 @@
                   </span>
                 {/if}
                 {#if v.wouldReturn !== undefined}
-                  <span class="return" class:yes={v.wouldReturn}>{RETURN_LABEL[`${v.wouldReturn}`]}</span>
+                  <span class="return" class:yes={v.wouldReturn === true}>{RETURN_LABEL[`${v.wouldReturn}`]}</span>
                 {/if}
               </footer>
             {/if}
