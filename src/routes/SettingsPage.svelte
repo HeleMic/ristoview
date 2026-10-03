@@ -6,7 +6,6 @@
   import { setNickname } from '../lib/actions';
   import { paths, router } from '../lib/router.svelte';
   import { store } from '../lib/store.svelte';
-  import { ui } from '../lib/ui.svelte';
 
   let nickname = $state(store.data.settings.nickname ?? '');
   let nickSaved = $state(false);
@@ -52,8 +51,13 @@
     }
   }
 
-  function preview() {
-    ui.previewEasterEgg = true;
+  const isLui = $derived(store.config?.role === 'lui');
+  let resetDone = $state(false);
+
+  function resetAll() {
+    store.resetAll();
+    nickname = '';
+    resetDone = true;
   }
 
   async function disconnect() {
@@ -66,6 +70,16 @@
   <h1 class="page-title">Impostazioni</h1>
 
   <div class="sheet lace-top">
+  <section aria-labelledby="s-device">
+    <h2 id="s-device" class="section-title">Questo dispositivo</h2>
+    <p class="device">
+      È di <strong>{store.config?.name || (isLui ? 'lui' : 'lei')}</strong>{store.config?.name
+        ? ` (${store.config.role})`
+        : ''}.
+    </p>
+  </section>
+
+  {#if isLui}
   <section aria-labelledby="s-nick">
     <h2 id="s-nick" class="section-title">Come chiamarla</h2>
     <form class="inline" onsubmit={saveNick}>
@@ -77,23 +91,7 @@
     </form>
     <p class="hint">Compare nel regalo e nella sorpresa. È salvato nel repo dati, non nel codice.</p>
   </section>
-
-  <section aria-labelledby="s-device">
-    <h2 id="s-device" class="section-title">Questo dispositivo</h2>
-    <div class="seg" role="radiogroup" aria-labelledby="s-device">
-      {#each [['lei', 'È di lei'], ['lui', 'È di lui']] as [value, label] (value)}
-        <label class:on={store.config?.role === value}>
-          <input
-            type="radio"
-            name="role"
-            checked={store.config?.role === value}
-            onchange={() => store.setRole(value as 'lei' | 'lui')}
-          />
-          {label}
-        </label>
-      {/each}
-    </div>
-  </section>
+  {/if}
 
   <section aria-labelledby="s-sync">
     <h2 id="s-sync" class="section-title">Salvataggio</h2>
@@ -138,20 +136,27 @@
     {#if importMsg}<p class="hint" role="status">{importMsg}</p>{/if}
   </section>
 
-  <section aria-labelledby="s-egg">
-    <h2 id="s-egg" class="section-title">La sorpresa</h2>
-    <p class="hint">
-      {#if store.data.settings.easterEggSeen}
-        Ha già detto sì.
-      {:else}
-        Non l'ha ancora vista: comparirà alla prossima apertura su un dispositivo di lei.
-      {/if}
-      L'anteprima non salva nulla.
-    </p>
-    <div class="row">
-      <button class="btn btn-ghost btn-sm" onclick={preview}><Icon name="gift" size={16} /> Anteprima sorpresa</button>
-    </div>
-  </section>
+  {#if isLui}
+    <section aria-labelledby="s-reset">
+      <h2 id="s-reset" class="section-title">Ricomincia da zero</h2>
+      <p class="hint">
+        Cancella ristoranti, recensioni, regali, soprannome e sorpresa su tutti e due i telefoni. Non si torna
+        indietro: prima fai un backup.
+      </p>
+      <div class="row">
+        {#if resetDone}
+          <p class="hint" role="status">Fatto: il diario è di nuovo vuoto.</p>
+        {:else}
+          <ConfirmButton
+            label="Cancella tutti i dati"
+            question="Cancellare tutto, per sempre?"
+            confirmLabel="Sì, cancella tutto"
+            onconfirm={resetAll}
+          />
+        {/if}
+      </div>
+    </section>
+  {/if}
 
   </div>
 
@@ -194,43 +199,8 @@
     flex: 1;
   }
 
-  .seg {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    padding: 4px;
-    border-radius: 999px;
-    background: var(--color-petal);
-    max-width: 360px;
-  }
-
-  .seg label {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-height: 42px;
-    border-radius: 999px;
-    font-weight: 700;
-    color: var(--color-cocoa-soft);
-    cursor: pointer;
-  }
-
-  .seg label.on {
-    background: var(--color-paper);
-    color: var(--color-cocoa);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .seg label:has(input:focus-visible) {
-    outline: 3px solid var(--color-ribbon);
-  }
-
-  .seg input {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
+  .device {
     margin: 0;
-    cursor: pointer;
   }
 
   .status {

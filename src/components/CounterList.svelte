@@ -27,7 +27,7 @@
           <span class="name">{r.name}</span>
           <span class="meta">
             {#if wishlist}
-              {[r.cuisine, r.address].filter(Boolean).join(' · ') || 'Da provare'}
+              {r.cuisine || 'Da provare'}
             {:else}
               {[r.cuisine, last ? formatDate(last) : null, visits > 1 ? `${visits} volte` : null]
                 .filter(Boolean)

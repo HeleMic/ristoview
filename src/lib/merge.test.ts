@@ -48,6 +48,20 @@ describe('mergeData', () => {
     expect(merged.restaurants.find((r) => r.id === 'w')?.number).toBe(0);
   });
 
+  test('a reset on one device wipes what the other device still has', () => {
+    const old = data({
+      restaurants: [restaurant('a', 1, '2026-10-01')],
+      settings: { easterEggSeen: true, nickname: 'A', updatedAt: '2026-10-01' },
+    });
+    const wiped = { ...data({}), updatedAt: '2026-10-10', resetAt: '2026-10-10' };
+    const merged = mergeData(old, wiped);
+    expect(merged.restaurants).toEqual([]);
+    expect(merged.settings.easterEggSeen).toBe(false);
+    expect(merged.settings.nickname).toBeUndefined();
+    const after = mergeData(merged, data({ restaurants: [restaurant('n', 1, '2026-10-11')] }));
+    expect(after.restaurants.map((x) => x.id)).toEqual(['n']);
+  });
+
   test('once the easter egg is seen it stays seen', () => {
     const local = data({ settings: { easterEggSeen: false, nickname: 'A', updatedAt: '2026-10-05' } });
     const remote = data({ settings: { easterEggSeen: true, updatedAt: '2026-10-01' } });

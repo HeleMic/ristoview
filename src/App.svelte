@@ -2,8 +2,9 @@
   import { onMount } from 'svelte';
   import AppNav from './components/AppNav.svelte';
   import Dog from './components/Dog.svelte';
+  import Lovebird from './components/Lovebird.svelte';
   import { markEasterEggSeen } from './lib/actions';
-  import { DOG_NAMES, randomBreed } from './lib/dogs';
+  import { BIRD_NAME, DOG_NAMES, randomBreed } from './lib/dogs';
   import { paths, router } from './lib/router.svelte';
   import { store } from './lib/store.svelte';
   import { ui } from './lib/ui.svelte';
@@ -20,16 +21,16 @@
   let justConnected = $state(false);
   let eggDeferred = $state(false);
   const loadingDog = randomBreed();
+  const loadingBird = Math.random() < 0.34;
 
   const eggPending = $derived(store.config?.role === 'lei' && !store.data.settings.easterEggSeen);
-  const showEgg = $derived(ui.previewEasterEgg || (eggPending && store.settled && !justConnected && !eggDeferred));
+  const showEgg = $derived(eggPending && store.settled && !justConnected && !eggDeferred);
   // Her first open waits for GitHub, so a stale cache never replays (or skips) the surprise.
   const waiting = $derived(!store.ready || (eggPending && !store.settled));
   const route = $derived(router.route);
 
   function onYes() {
-    if (ui.previewEasterEgg) ui.previewEasterEgg = false;
-    else markEasterEggSeen();
+    markEasterEggSeen();
     ui.justSaidYes = true;
     router.go(paths.gift);
   }
@@ -63,8 +64,13 @@
   <Setup onconnected={onConnected} />
 {:else if waiting}
   <div class="loading" role="status">
-    <Dog breed={loadingDog} size={120} tilt={-8} />
-    <p>{DOG_NAMES[loadingDog]} sta aprendo la pasticceria…</p>
+    {#if loadingBird}
+      <Lovebird size={90} tilt={-12} />
+      <p>{BIRD_NAME} sta aprendo la pasticceria…</p>
+    {:else}
+      <Dog breed={loadingDog} size={120} tilt={-8} />
+      <p>{DOG_NAMES[loadingDog]} sta aprendo la pasticceria…</p>
+    {/if}
   </div>
 {:else if justConnected}
   <div class="loading ready">

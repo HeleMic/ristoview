@@ -24,7 +24,8 @@
 
   const breed = randomBreed();
   const dogName = DOG_NAMES[breed];
-  const withBird = Math.random() < 0.5;
+  const withBird = Math.random() < 0.6;
+  const isLui = $derived(store.config?.role === 'lui');
 
   let view = $state<'box' | 'opening' | 'menu'>('box');
   let picked = $state<string | undefined>();
@@ -95,7 +96,41 @@
 </script>
 
 <main class="page">
-  {#if view === 'menu'}
+  {#if isLui}
+    <!-- His side: the gift is hers. He only sees where it stands, and can stamp it after dinner. -->
+    <section class="lui">
+      <h1 class="page-title">Il regalo di {month}</h1>
+      <div class="sheet lace-top lui-sheet" aria-live="polite">
+        <section>
+          {#if status === 'unopened'}
+            <p class="lui-big">{nickname ?? 'Lei'} non ha ancora aperto il pacchetto.</p>
+            <p class="hint">Vale fino al {monthDeadline()}.</p>
+          {:else if status === 'chosen'}
+            <p class="lui-big">
+              Ha scelto <strong>{gift?.category === 'sorpresa' ? 'a sorpresa: scegli tu' : categoryLabel(gift?.category)}</strong>.
+            </p>
+            <p class="hint">Può cambiare idea fino a quando non ci andate. Scade il {monthDeadline()}.</p>
+            <div class="actions">
+              <button class="btn btn-primary grow" onclick={confirmRedeem}><Icon name="check" /> Ci siamo andati</button>
+            </div>
+          {:else}
+            <p class="lui-big">
+              Sfruttato il {formatDate(gift?.redeemedAt)}{linked ? ` da ${linked.name}` : ''}.
+            </p>
+            <p class="hint">Il prossimo pacchetto arriva il 1° {nextMonth}.</p>
+            <button class="undo" onclick={unredeemGift}>Annulla il timbro</button>
+          {/if}
+        </section>
+      </div>
+      <p class="guard">
+        {#if withBird}
+          {BIRD_NAME} giura che non le dirà niente.
+        {:else}
+          {dogName} sa mantenere un segreto.
+        {/if}
+      </p>
+    </section>
+  {:else if view === 'menu'}
     <section class="menu" aria-labelledby="menu-title">
       <header class="menu-head">
         <h1 id="menu-title" class="page-title">Cosa ti va di mangiare?</h1>
@@ -109,8 +144,6 @@
           <label class="item" class:on={picked === c.id} style:--i={i}>
             <input type="radio" name="gift" value={c.id} bind:group={picked} />
             <span class="name">{c.label}</span>
-            <span class="leader" aria-hidden="true"></span>
-            <span class="hint">{c.hint}</span>
             <span class="mark" aria-hidden="true"><Icon name="check" size={16} stroke={3} /></span>
           </label>
         {/each}
@@ -248,6 +281,9 @@
       {/if}
     </section>
 
+  {/if}
+
+  {#if view !== 'menu'}
     {#if recent.length}
       <section class="recent" aria-labelledby="recent-title">
         <div class="sec-head">
@@ -315,6 +351,25 @@
     gap: 22px;
     overflow-x: clip;
     overflow-y: visible;
+  }
+
+  .lui {
+    display: grid;
+    gap: 16px;
+  }
+
+  .lui-sheet section {
+    gap: 10px;
+  }
+
+  .lui-big {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 650;
+  }
+
+  .lui-big strong {
+    color: var(--color-ribbon);
   }
 
   .guard {
@@ -392,11 +447,11 @@
   .item {
     position: relative;
     display: grid;
-    grid-template-columns: auto 1fr 28px;
-    grid-template-rows: auto auto;
-    align-items: baseline;
+    grid-template-columns: 1fr 28px;
+    align-items: center;
     column-gap: 8px;
-    padding: 12px 12px;
+    min-height: 52px;
+    padding: 6px 12px;
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 160ms;
@@ -429,24 +484,8 @@
     font-size: 18px;
   }
 
-  .leader {
-    grid-column: 2;
-    align-self: end;
-    margin-bottom: 6px;
-    border-bottom: 2px dotted var(--color-line);
-  }
-
-  .hint {
-    grid-column: 1 / 3;
-    grid-row: 2;
-    font-size: 14px;
-    color: var(--color-cocoa-soft);
-  }
-
   .mark {
-    grid-column: 3;
-    grid-row: 1 / 3;
-    align-self: center;
+    grid-column: 2;
     display: grid;
     place-items: center;
     width: 28px;

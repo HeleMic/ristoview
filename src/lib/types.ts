@@ -42,6 +42,8 @@ export interface Review {
   /** "YYYY-MM-DD" */
   date?: string;
   author?: Role;
+  /** Name of whoever wrote it, from the device setup. */
+  authorName?: string;
   dishes?: string;
   ratings?: Ratings;
   waiters?: string;
@@ -63,6 +65,8 @@ export interface AppData {
   reviews: Review[];
   /** Tombstones: ids deleted on any device, so a merge never resurrects them. */
   deleted: string[];
+  /** Set by "Cancella tutti i dati": anything last touched before it is gone on every device. */
+  resetAt?: string;
 }
 
 export function emptyData(now = new Date().toISOString()): AppData {

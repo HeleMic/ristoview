@@ -65,36 +65,42 @@ Così, se lei perde il telefono, revochi solo il suo senza toccare il tuo.
 
 ## 3. Collega l'app
 
-Al primo avvio, su un dispositivo non configurato, l'app mostra la schermata **Collegamento**.
+Il repo dei dati è fisso nel codice (`HeleMic/ristoview-data`, branch `main`, file `data.json`: vedi
+`DATA_REPO` in `src/lib/storage/config.ts`). Al primo avvio, su un dispositivo non collegato, l'app chiede solo tre
+cose:
 
-| Campo | Esempio | Note |
-|---|---|---|
-| Proprietario | `il-tuo-username` | l'account GitHub che possiede il repo |
-| Repository | `ristoview-data` | |
-| Branch | `main` | |
-| File | `data.json` | |
-| Token | `github_pat_…` | resta solo in questo browser (`localStorage`) |
-| Questo dispositivo è di… | **Lui** / **Lei** | decide chi firma le recensioni e dove può comparire la sorpresa |
+| Campo | Note |
+|---|---|
+| Questo dispositivo è di… | **Lui** o **Lei**. Non si cambia più: per cambiarlo bisogna scollegare il dispositivo e rifare l'accesso |
+| Il tuo nome | firma le recensioni scritte da questo dispositivo |
+| Token | `github_pat_…`, resta solo in questo browser (`localStorage`) |
 
-Premi **Collega**: l'app verifica il token, legge `data.json` (o lo crea) e sei operativo.
+Premi **Entra**: l'app verifica il token, legge `data.json` (o lo crea) e sei operativo.
+
+### Cosa vede chi
+
+- **Lei** vede il regalo del mese: apre il pacchetto, sceglie la cena, può cambiare idea fino al timbro.
+- **Lui** vede solo lo stato del regalo (non aperto, cosa ha scelto, sfruttato) e può timbrarlo dopo la cena.
+  Dalle Impostazioni imposta il **soprannome** di lei e può **cancellare tutti i dati**.
 
 ### Configurare il telefono di lei senza rovinare la sorpresa
 
-La schermata "Vuoi venire a cena con me?" compare **solo sui dispositivi impostati come "Lei"** e **solo finché lei
-non ha premuto "Sì"**. Il flag `easterEggSeen` sta in `data.json`, quindi dopo il primo "Sì" non ricompare su nessun
-dispositivo.
+La schermata "Vuoi venire a cena con me?" compare **solo sui dispositivi di lei** e **solo finché lei non ha premuto
+"Sì"**. Il flag `easterEggSeen` sta in `data.json`, quindi dopo il primo "Sì" non ricompare su nessun dispositivo.
 
-Procedura consigliata:
-
-1. Imposta il **soprannome** di lei dalle **Impostazioni** sul tuo dispositivo (salvato in `data.json` →
+1. Sul tuo dispositivo, in **Impostazioni → Come chiamarla**, imposta il soprannome (salvato in `data.json` →
    `settings.nickname`).
-2. Sul telefono di lei apri il sito (meglio: **Condividi → Aggiungi a Home** per installarlo come app), compila il
-   collegamento con il **suo token** e scegli **Lei**.
-3. Dopo il collegamento l'app mostra **"Tutto pronto"**: chiudi lì. La sorpresa partirà la prossima volta che lei apre
-   l'app.
+2. Sul telefono di lei apri il sito (meglio: **Condividi → Aggiungi alla schermata Home**), scegli **Lei**, scrivi il
+   suo nome e incolla il **suo token**.
+3. Dopo l'accesso l'app mostra **"Tutto pronto"**: premi **Entra senza mostrarla** e chiudi. La sorpresa partirà la
+   prossima volta che lei apre l'app.
 
-Se vuoi rivedere la sorpresa senza consumarla, in **Impostazioni → Anteprima sorpresa** la puoi provare: in anteprima
-il flag non viene salvato.
+### Ricominciare da zero
+
+**Impostazioni → Ricomincia da zero → Cancella tutti i dati** (solo sul dispositivo di lui) svuota ristoranti,
+recensioni, regali, soprannome e flag della sorpresa. In `data.json` resta un campo `resetAt`: anche se l'altro telefono
+aveva una copia vecchia in cache, alla prima sincronizzazione la scarta. Lo storico su GitHub resta, quindi un reset
+fatto per sbaglio si può sempre annullare ripristinando una versione precedente del file (vedi sotto).
 
 ---
 
@@ -168,16 +174,17 @@ esistenti.
     }
   ],
   "restaurants": [
-    { "id": "r_…", "number": 1, "name": "Da Mario", "cuisine": "pizza", "address": "…",
+    { "id": "r_…", "number": 1, "name": "Da Mario", "cuisine": "Pizza",
       "mapsUrl": "…", "wishlist": false, "createdAt": "…", "updatedAt": "…" }
   ],
   "reviews": [
-    { "id": "v_…", "restaurantId": "r_…", "date": "2026-10-03", "author": "lei",
+    { "id": "v_…", "restaurantId": "r_…", "date": "2026-10-03", "author": "lei", "authorName": "…",
       "dishes": "…", "ratings": { "food": 5, "service": 4, "welcome": 5, "ambience": 4, "value": 4 },
       "waiters": "…", "welcomeNotes": "…", "bill": 64.5, "people": 2, "notes": "…",
       "wouldReturn": true, "createdAt": "…", "updatedAt": "…" }
   ],
-  "deleted": ["r_…"]                // id eliminati, per non farli "resuscitare" durante le sincronizzazioni
+  "deleted": ["r_…"],               // id eliminati, per non farli "resuscitare" durante le sincronizzazioni
+  "resetAt": "…"                    // solo dopo "Cancella tutti i dati"
 }
 ```
 
@@ -202,7 +209,7 @@ calcola.
 | Messaggio / sintomo | Causa probabile | Soluzione |
 |---|---|---|
 | **Token non valido o scaduto** (401) | token scaduto, revocato o copiato male | genera un nuovo token e reinseriscilo in Impostazioni |
-| **Repository non trovato** (404) | proprietario/nome sbagliati, oppure il token non include quel repo | controlla i campi; nel token verifica *Only select repositories* |
+| **Repository non trovato** (404) | il token non include `ristoview-data`, o è stato generato da un altro account | nel token verifica *Only select repositories* → `ristoview-data` |
 | **Permesso negato** (403) | il token ha *Contents: Read-only* | modifica il token → *Contents: Read and write* |
 | **Troppe richieste** (403/429) | limite API (5.000/ora: praticamente impossibile da raggiungere) | aspetta qualche minuto |
 | **File dati non valido** | `data.json` modificato a mano con un errore | correggilo su GitHub o ripristina una versione precedente |

@@ -3,26 +3,24 @@ import type { AppData, Gift } from './types';
 export interface GiftCategory {
   id: string;
   label: string;
-  /** Short line under the label on the menu. */
-  hint: string;
 }
 
 export const GIFT_CATEGORIES: GiftCategory[] = [
-  { id: 'sushi', label: 'Sushi', hint: 'nigiri, uramaki, edamame' },
-  { id: 'pizza', label: 'Pizza', hint: 'napoletana o alla pala' },
-  { id: 'hamburger', label: 'Hamburger', hint: 'con patatine, ovvio' },
-  { id: 'pesce', label: 'Pesce', hint: 'crudi, fritto misto, spaghetti alle vongole' },
-  { id: 'carne', label: 'Carne', hint: 'fiorentina, tagliata, brace' },
-  { id: 'trattoria', label: 'Trattoria', hint: 'cucina di casa, porzioni generose' },
-  { id: 'ramen', label: 'Ramen', hint: 'brodo caldo e gyoza' },
-  { id: 'cinese', label: 'Cinese', hint: 'ravioli al vapore, anatra laccata' },
-  { id: 'messicano', label: 'Messicano', hint: 'tacos, nachos, margarita' },
-  { id: 'indiano', label: 'Indiano', hint: 'curry, naan, tandoori' },
-  { id: 'thai', label: 'Thai', hint: 'pad thai e curry al cocco' },
-  { id: 'poke', label: 'Poke', hint: 'bowl fresca e leggera' },
-  { id: 'tapas', label: 'Tapas', hint: 'tanti piattini da condividere' },
-  { id: 'vegetariano', label: 'Vegetariano', hint: 'verdure protagoniste' },
-  { id: 'sorpresa', label: 'Sorprendimi', hint: 'scegli tu, mi fido' },
+  { id: 'sushi', label: 'Sushi' },
+  { id: 'pizza', label: 'Pizza' },
+  { id: 'hamburger', label: 'Hamburger' },
+  { id: 'pesce', label: 'Pesce' },
+  { id: 'carne', label: 'Carne' },
+  { id: 'trattoria', label: 'Trattoria' },
+  { id: 'ramen', label: 'Ramen' },
+  { id: 'cinese', label: 'Cinese' },
+  { id: 'messicano', label: 'Messicano' },
+  { id: 'indiano', label: 'Indiano' },
+  { id: 'thai', label: 'Thai' },
+  { id: 'poke', label: 'Poke' },
+  { id: 'tapas', label: 'Tapas' },
+  { id: 'vegetariano', label: 'Vegetariano' },
+  { id: 'sorpresa', label: 'Sorprendimi' },
 ];
 
 export function categoryLabel(id: string | undefined): string {

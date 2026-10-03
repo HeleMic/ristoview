@@ -2,7 +2,7 @@ import { mergeData, normalizeData } from './merge';
 import { clearCache, readCache, writeCache } from './storage/cache';
 import { clearConfig, loadConfig, saveConfig, type DeviceConfig, type GitHubConfig } from './storage/config';
 import { checkRepo, GitHubError, readFile, writeFile } from './storage/github';
-import { emptyData, type AppData, type Role } from './types';
+import { emptyData, type AppData } from './types';
 
 export type SyncStatus = 'idle' | 'syncing' | 'saved' | 'offline' | 'local' | 'error';
 
@@ -76,10 +76,12 @@ class AppStore {
     this.settled = true;
   }
 
-  setRole(role: Role): void {
-    if (!this.config) return;
-    this.config = { ...this.config, role };
-    saveConfig(this.config);
+  /** Wipes every restaurant, review, gift and setting, on every device (see `resetAt` in merge). */
+  resetAll(): void {
+    const t = new Date().toISOString();
+    this.mutate('reset completo dei dati', (d) => {
+      Object.assign(d, emptyData(t), { resetAt: t });
+    });
   }
 
   async disconnect(): Promise<void> {

@@ -292,7 +292,7 @@ textarea.input {
   padding-top: 4px;
 }
 
-.sheet legend {
+.sheet > fieldset > legend {
   float: left;
   width: 100%;
   padding: 0;

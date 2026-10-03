@@ -27,9 +27,7 @@
   const score = $derived(restaurantScore(store.data, id));
   const mapsHref = $derived(
     restaurant?.mapsUrl ||
-      (restaurant?.address
-        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${restaurant.name} ${restaurant.address}`)}`
-        : undefined),
+      (restaurant ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.name)}` : undefined),
   );
 
   const RETURN_LABEL = { true: 'Sì, ci torniamo', false: 'Una volta basta' } as const;
@@ -59,13 +57,11 @@
         </div>
         {#if !restaurant.wishlist}<ScoreSeal {score} size={64} />{/if}
       </div>
-      {#if restaurant.cuisine || restaurant.address || restaurant.wishlist}
+      {#if restaurant.cuisine || restaurant.wishlist || mapsHref}
         <p class="meta">
           {#if restaurant.wishlist}<span class="chip">Da provare</span>{/if}
           {#if restaurant.cuisine}<span>{restaurant.cuisine}</span>{/if}
-          {#if restaurant.address}
-            <a href={mapsHref} target="_blank" rel="noopener noreferrer"><Icon name="pin" size={16} /> {restaurant.address}</a>
-          {:else if mapsHref}
+          {#if mapsHref}
             <a href={mapsHref} target="_blank" rel="noopener noreferrer"><Icon name="pin" size={16} /> Mappa</a>
           {/if}
         </p>
@@ -91,7 +87,7 @@
           <article class="visit">
             <header class="v-head">
               <h2 class="v-date">{v.date ? formatDate(v.date) : 'Senza data'}</h2>
-              <span class="v-by">{v.author === 'lui' ? 'scritta da lui' : v.author === 'lei' ? 'scritta da lei' : ''}</span>
+              <span class="v-by">{v.authorName || v.author ? `scritta da ${v.authorName || v.author}` : ''}</span>
               <a class="v-edit" href={paths.review(restaurant.id, v.id)} aria-label="Modifica questa recensione">
                 <Icon name="pencil" size={18} />
               </a>

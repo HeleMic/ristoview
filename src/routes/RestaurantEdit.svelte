@@ -17,7 +17,6 @@
 
   let name = $state(existing?.name ?? '');
   let cuisine = $state(existing?.cuisine ?? '');
-  let address = $state(existing?.address ?? '');
   let mapsUrl = $state(existing?.mapsUrl ?? '');
   let notes = $state(existing?.notes ?? '');
   let wishlist = $state(existing?.wishlist ?? creating);
@@ -38,7 +37,6 @@
     const fields = {
       name: trimmed,
       cuisine: cuisine.trim() || undefined,
-      address: address.trim() || undefined,
       mapsUrl: mapsUrl.trim() || undefined,
       notes: notes.trim() || undefined,
       wishlist,
@@ -66,17 +64,13 @@
       <span id="re-err" class="hint error">{error}</span>
     </label>
     <label class="field">
-      <span>Cucina</span>
+      <span>Tipo di ristorante</span>
       <input class="input" placeholder="Es. Pesce" bind:value={cuisine} />
-    </label>
-    <label class="field">
-      <span>Indirizzo o zona</span>
-      <input class="input" placeholder="Es. Via Roma 12, Bologna" bind:value={address} />
     </label>
     <label class="field">
       <span>Link Google Maps</span>
       <input class="input" type="url" inputmode="url" placeholder="https://maps.app.goo.gl/…" bind:value={mapsUrl} />
-      <span class="hint">Se lo lasci vuoto, la mappa cerca nome e indirizzo.</span>
+      <span class="hint">Se lo lasci vuoto, la mappa cerca il nome.</span>
     </label>
     <label class="field">
       <span>Note</span>

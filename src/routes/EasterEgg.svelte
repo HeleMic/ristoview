@@ -21,6 +21,8 @@
     'Momo e Lilla tifano per il Sì.',
     'Lilla ha sbuffato.',
     'Pachino ha fischiato: è un sì.',
+    'Pachino ripete «sì, sì, sì!».',
+    'Pachino ha beccato il No. Quasi.',
     'Momo l’ha visto scappare di là.',
     'Ci stai mettendo impegno, eh?',
     'Il No è in ferie.',

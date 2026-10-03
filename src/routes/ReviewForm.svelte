@@ -23,7 +23,6 @@
 
   let name = $state('');
   let cuisine = $state('');
-  let address = $state('');
   let date = $state(existing?.date ?? todayIso());
   let dishes = $state(existing?.dishes ?? '');
   let ratings = $state<Ratings>({ ...(existing?.ratings ?? {}) });
@@ -57,7 +56,6 @@
       addRestaurant({
         name,
         cuisine: cuisine.trim() || undefined,
-        address: address.trim() || undefined,
       });
     const clean = Object.fromEntries(Object.entries(ratings).filter(([, v]) => !!v)) as Ratings;
     saveReview(
@@ -65,6 +63,7 @@
       {
         date: date || undefined,
         author: store.config?.role,
+        authorName: store.config?.name,
         dishes: dishes.trim() || undefined,
         ratings: Object.keys(clean).length ? clean : undefined,
         waiters: waiters.trim() || undefined,
@@ -132,19 +131,13 @@
           </span>
         </label>
         {#if isNewPlace}
-          <div class="two">
-            <label class="field">
-              <span>Cucina</span>
+          <label class="field">
+            <span>Tipo di ristorante</span>
               <input class="input" list="rf-cuisines" placeholder="Es. Sushi" bind:value={cuisine} />
               <datalist id="rf-cuisines">
                 {#each cuisines as c (c)}<option value={c}></option>{/each}
               </datalist>
             </label>
-            <label class="field">
-              <span>Indirizzo o zona</span>
-              <input class="input" placeholder="Es. Via Roma 12, Bologna" bind:value={address} />
-            </label>
-          </div>
         {/if}
       </fieldset>
     {/if}
@@ -157,7 +150,7 @@
       </label>
       <label class="field">
         <span>Cosa abbiamo mangiato</span>
-        <textarea class="input" placeholder="Antipasti, primi, dolce, vino…" bind:value={dishes}></textarea>
+        <textarea class="input" placeholder="Cosa avete ordinato" bind:value={dishes}></textarea>
       </label>
     </fieldset>
 

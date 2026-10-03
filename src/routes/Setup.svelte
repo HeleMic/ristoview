@@ -1,5 +1,7 @@
 <script lang="ts">
   import Dog from '../components/Dog.svelte';
+  import Lovebird from '../components/Lovebird.svelte';
+  import { DATA_REPO } from '../lib/storage/config';
   import { GitHubError } from '../lib/storage/github';
   import { store } from '../lib/store.svelte';
   import type { Role } from '../lib/types';
@@ -9,34 +11,22 @@
   }
   let { onconnected }: Props = $props();
 
-  let owner = $state('');
-  let repo = $state('ristoview-data');
-  let branch = $state('main');
-  let path = $state('data.json');
+  let name = $state('');
   let token = $state('');
   let role = $state<Role>('lei');
   let busy = $state(false);
   let error = $state('');
-  let advanced = $state(false);
 
   async function connect(e: SubmitEvent) {
     e.preventDefault();
-    if (!owner.trim() || !repo.trim() || !token.trim()) {
-      error = 'Servono proprietario, repository e token.';
+    if (!name.trim() || !token.trim()) {
+      error = 'Servono il nome e il token.';
       return;
     }
     busy = true;
     error = '';
     try {
-      await store.connect({
-        mode: 'github',
-        owner: owner.trim(),
-        repo: repo.trim(),
-        branch: branch.trim() || 'main',
-        path: path.trim() || 'data.json',
-        token: token.trim(),
-        role,
-      });
+      await store.connect({ mode: 'github', ...DATA_REPO, token: token.trim(), role, name: name.trim() });
       onconnected();
     } catch (err) {
       error = err instanceof GitHubError || err instanceof Error ? err.message : String(err);
@@ -46,7 +36,7 @@
   }
 
   async function tryLocal() {
-    await store.connect({ mode: 'local', role });
+    await store.connect({ mode: 'local', role, name: name.trim() || undefined });
     onconnected();
   }
 </script>
@@ -57,10 +47,11 @@
     <div class="brand">
       <div class="dogs" aria-hidden="true">
         <Dog breed="norfolk" size={86} look={{ x: 0.6, y: 0.2 }} tilt={-6} />
+        <div class="bird"><Lovebird size={52} /></div>
         <Dog breed="pinscher" size={86} look={{ x: -0.6, y: 0.2 }} tilt={6} />
       </div>
       <h1 class="script logo">ristoview</h1>
-      <p class="tag">Colleghiamo questo dispositivo al vostro diario.</p>
+      <p class="tag">Ciao! Due cose e siamo pronti.</p>
     </div>
 
     <form onsubmit={connect} novalidate>
@@ -70,38 +61,26 @@
           <label class:on={role === 'lei'}><input type="radio" bind:group={role} value="lei" /> Lei</label>
           <label class:on={role === 'lui'}><input type="radio" bind:group={role} value="lui" /> Lui</label>
         </div>
-        <p class="hint">Firma le recensioni. La sorpresa iniziale compare solo sui dispositivi di lei.</p>
+        <p class="hint">Firma le recensioni.</p>
       </fieldset>
 
       <label class="field">
-        <span>Proprietario del repo dati</span>
-        <input class="input" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="il tuo username GitHub" bind:value={owner} />
+        <span>Il tuo nome</span>
+        <input class="input" autocomplete="given-name" placeholder="Come firmi le recensioni" bind:value={name} />
       </label>
       <label class="field">
-        <span>Repository</span>
-        <input class="input" autocapitalize="off" spellcheck="false" bind:value={repo} />
-      </label>
-      <label class="field">
-        <span>Token GitHub</span>
+        <span>Token</span>
         <input class="input" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" bind:value={token} />
-        <span class="hint">Resta solo in questo browser. Come generarlo: <code>docs/guida-dati.md</code>.</span>
       </label>
-
-      {#if advanced}
-        <div class="two">
-          <label class="field"><span>Branch</span><input class="input" autocapitalize="off" bind:value={branch} /></label>
-          <label class="field"><span>File</span><input class="input" autocapitalize="off" bind:value={path} /></label>
-        </div>
-      {:else}
-        <button type="button" class="link" onclick={() => (advanced = true)}>Branch e file personalizzati</button>
-      {/if}
 
       <p class="error" role="alert">{error}</p>
 
       <button class="btn btn-ribbon" type="submit" disabled={busy}>
-        {busy ? 'Controllo il token…' : 'Collega'}
+        {busy ? 'Controllo il token…' : 'Entra'}
       </button>
-      <button type="button" class="link center" onclick={tryLocal}>Provalo senza GitHub (i dati restano su questo dispositivo)</button>
+      {#if import.meta.env.DEV}
+        <button type="button" class="link center" onclick={tryLocal}>Prova in locale (solo sviluppo)</button>
+      {/if}
     </form>
   </main>
 </div>
@@ -139,6 +118,7 @@
 
   .dogs {
     display: flex;
+    align-items: flex-end;
     gap: 4px;
     margin-top: -48px;
   }
@@ -210,18 +190,7 @@
     cursor: pointer;
   }
 
-  .two {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
 
-  code {
-    font-size: 0.92em;
-    padding: 1px 5px;
-    border-radius: 5px;
-    background: var(--color-blush);
-  }
 
   .link {
     justify-self: start;

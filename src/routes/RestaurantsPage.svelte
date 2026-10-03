@@ -22,8 +22,7 @@
         (r) =>
           !q ||
           r.name.toLocaleLowerCase('it').includes(q) ||
-          (r.cuisine ?? '').toLocaleLowerCase('it').includes(q) ||
-          (r.address ?? '').toLocaleLowerCase('it').includes(q),
+          (r.cuisine ?? '').toLocaleLowerCase('it').includes(q),
       )
       .map((r) => ({
         r,
@@ -65,7 +64,7 @@
       <label class="search">
         <span class="sr-only">Cerca</span>
         <Icon name="search" size={18} />
-        <input class="input" type="search" placeholder="Cerca per nome, cucina, zona" bind:value={query} />
+        <input class="input" type="search" placeholder="Cerca per nome o tipo" bind:value={query} />
       </label>
       {#if tab === 'visited'}
         <label class="sort">
