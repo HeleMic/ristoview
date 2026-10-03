@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="150 170 724 724">
-  <!-- Browser tab icon: the gift without its ground, readable on light and dark tab bars. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- ristoview app icon: the monthly gift. Full bleed and opaque, so iOS never adds its own black or white fill. -->
   <defs>
     <!-- one stripe pattern anchored to the canvas, so lid and box stripes line up -->
     <pattern id="stripes" width="100" height="100" patternUnits="userSpaceOnUse" x="12">
@@ -16,7 +16,9 @@
     </radialGradient>
   </defs>
 
+  <rect width="1024" height="1024" fill="#fdeef2"/>
   <g transform="translate(512 548) scale(1.14) translate(-512 -560)">
+  <ellipse cx="512" cy="862" rx="300" ry="44" fill="url(#floor)"/>
 
   <!-- box -->
   <rect x="262" y="468" width="500" height="382" rx="40" fill="url(#stripes)"/>

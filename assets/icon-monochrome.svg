@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Android themed icon: one-colour silhouette, ribbon and seal cut out. Kept inside the 66% safe zone. -->
+  <defs>
+    <mask id="cut">
+      <rect width="1024" height="1024" fill="#fff"/>
+      <rect x="472" y="378" width="80" height="472" fill="#000"/>
+      <rect x="262" y="612" width="500" height="74" fill="#000"/>
+      <rect x="228" y="484" width="568" height="18" fill="#000"/>
+      <circle cx="512" cy="649" r="92" fill="#000"/>
+    </mask>
+  </defs>
+  <g transform="translate(512 560) scale(0.78) translate(-512 -560)">
+    <g mask="url(#cut)" fill="#000">
+      <rect x="262" y="468" width="500" height="382" rx="40"/>
+      <rect x="228" y="378" width="568" height="112" rx="32"/>
+    </g>
+    <circle cx="512" cy="649" r="66" fill="#000"/>
+    <path d="M500 372 C440 250 300 240 312 318 C322 382 430 384 500 380 Z" fill="#000"/>
+    <path d="M524 372 C584 250 724 240 712 318 C702 382 594 384 524 380 Z" fill="#000"/>
+    <rect x="478" y="320" width="68" height="70" rx="24" fill="#000"/>
+  </g>
+</svg>

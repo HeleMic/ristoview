@@ -28,6 +28,7 @@ dati solo locali, oppure collega il repo dei dati.
 | `bun test src` | test unitari (merge dei dati, logica del regalo) |
 | `bun run build` | build di produzione in `dist/` |
 | `bun run preview` | serve la build di produzione |
+| `bun run icons` | rigenera le icone PNG da `assets/icon.svg` e `assets/icon-monochrome.svg` |
 
 ## Pubblicazione
 
