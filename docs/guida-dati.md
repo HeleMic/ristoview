@@ -98,7 +98,9 @@ La schermata "Vuoi venire a cena con me?" compare **solo sui dispositivi di lei*
 ### Ricominciare da zero
 
 **Impostazioni → Ricomincia da zero → Cancella tutti i dati** (solo sul dispositivo di lui) svuota ristoranti,
-recensioni, regali, soprannome e flag della sorpresa. In `data.json` resta un campo `resetAt`: anche se l'altro telefono
+recensioni, regali, soprannome e flag della sorpresa, poi scollega il dispositivo: token, ruolo, nome e cache locale
+vengono cancellati e si torna alla schermata di primo accesso. Se GitHub non risponde il dispositivo resta collegato
+(la cancellazione partirà appena torna la connessione) e l'app lo segnala. In `data.json` resta un campo `resetAt`: anche se l'altro telefono
 aveva una copia vecchia in cache, alla prima sincronizzazione la scarta. Lo storico su GitHub resta, quindi un reset
 fatto per sbaglio si può sempre annullare ripristinando una versione precedente del file (vedi sotto).
 

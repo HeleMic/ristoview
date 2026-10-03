@@ -52,12 +52,20 @@
   }
 
   const isLui = $derived(store.config?.role === 'lui');
-  let resetDone = $state(false);
+  let resetting = $state(false);
+  let resetError = $state('');
 
-  function resetAll() {
-    store.resetAll();
-    nickname = '';
-    resetDone = true;
+  async function resetAll() {
+    resetting = true;
+    resetError = '';
+    try {
+      await store.resetAll();
+      router.go(paths.gift, true);
+    } catch (err) {
+      resetError = (err as Error).message;
+    } finally {
+      resetting = false;
+    }
   }
 
   async function disconnect() {
@@ -140,12 +148,12 @@
     <section aria-labelledby="s-reset">
       <h2 id="s-reset" class="section-title">Ricomincia da zero</h2>
       <p class="hint">
-        Cancella ristoranti, recensioni, regali, soprannome e sorpresa su tutti e due i telefoni. Non si torna
-        indietro: prima fai un backup.
+        Cancella ristoranti, recensioni, regali, soprannome e sorpresa su tutti e due i telefoni, poi scollega
+        questo dispositivo (token compreso). Non si torna indietro: prima fai un backup.
       </p>
       <div class="row">
-        {#if resetDone}
-          <p class="hint" role="status">Fatto: il diario è di nuovo vuoto.</p>
+        {#if resetting}
+          <p class="hint" role="status">Sto cancellando tutto…</p>
         {:else}
           <ConfirmButton
             label="Cancella tutti i dati"
@@ -155,6 +163,7 @@
           />
         {/if}
       </div>
+      {#if resetError}<p class="error" role="alert">{resetError}</p>{/if}
     </section>
   {/if}
 

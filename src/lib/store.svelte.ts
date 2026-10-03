@@ -76,12 +76,25 @@ class AppStore {
     this.settled = true;
   }
 
-  /** Wipes every restaurant, review, gift and setting, on every device (see `resetAt` in merge). */
-  resetAll(): void {
+  /**
+   * Wipes every restaurant, review, gift and setting on every device (see `resetAt` in merge),
+   * then forgets this device too: token, role, name and local cache.
+   * Throws, keeping the device connected, if the wipe could not reach GitHub.
+   */
+  async resetAll(): Promise<void> {
     const t = new Date().toISOString();
     this.mutate('reset completo dei dati', (d) => {
       Object.assign(d, emptyData(t), { resetAt: t });
     });
+    if (this.github) {
+      await this.flush();
+      if (this.dirty) {
+        throw new Error(
+          'GitHub non risponde: i dati sono cancellati qui ma non ancora online. Riprova quando sei connesso.',
+        );
+      }
+    }
+    await this.disconnect();
   }
 
   async disconnect(): Promise<void> {
