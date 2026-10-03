@@ -17,14 +17,12 @@
   import SettingsPage from './routes/SettingsPage.svelte';
   import Setup from './routes/Setup.svelte';
 
-  /** Set right after setup on her device: he decides whether the surprise starts now or next time. */
-  let justConnected = $state(false);
-  let eggDeferred = $state(false);
   const loadingDog = randomBreed();
   const loadingBird = Math.random() < 0.34;
 
   const eggPending = $derived(store.config?.role === 'lei' && !store.data.settings.easterEggSeen);
-  const showEgg = $derived(eggPending && store.settled && !justConnected && !eggDeferred);
+  // On her device the surprise starts right after setup, and again on every open until she says yes.
+  const showEgg = $derived(eggPending && store.settled);
   // Her first open waits for GitHub, so a stale cache never replays (or skips) the surprise.
   const waiting = $derived(!store.ready || (eggPending && !store.settled));
   const route = $derived(router.route);
@@ -36,7 +34,6 @@
   }
 
   function onConnected() {
-    if (store.config?.role === 'lei' && !store.data.settings.easterEggSeen) justConnected = true;
     router.go(paths.gift, true);
   }
 
@@ -71,24 +68,6 @@
       <Dog breed={loadingDog} size={120} tilt={-8} />
       <p>{DOG_NAMES[loadingDog]} sta aprendo la pasticceria…</p>
     {/if}
-  </div>
-{:else if justConnected}
-  <div class="loading ready">
-    <div class="pair" aria-hidden="true">
-      <Dog breed="norfolk" size={104} />
-      <Dog breed="pinscher" size={104} />
-    </div>
-    <h1 class="page-title">Tutto pronto</h1>
-    <p>
-      Questo dispositivo è collegato ed è di lei. Momo, Lilla e Pachino aspettano: la sorpresa partirà la prossima
-      volta che apre ristoview qui.
-    </p>
-    <div class="ready-actions">
-      <button class="btn btn-ghost" onclick={() => ((justConnected = false), (eggDeferred = true))}>
-        Entra senza mostrarla
-      </button>
-      <button class="btn btn-ribbon" onclick={() => (justConnected = false)}>Mostrala adesso</button>
-    </div>
   </div>
 {:else if showEgg}
   <EasterEgg nickname={store.data.settings.nickname} onyes={onYes} />
@@ -130,23 +109,4 @@
     max-width: 38ch;
   }
 
-  .ready {
-    color: var(--color-cocoa);
-    background:
-      linear-gradient(var(--color-blush), var(--color-blush)) center / 100% calc(100% - 20px) no-repeat,
-      var(--stripes);
-  }
-
-  .pair {
-    display: flex;
-    gap: 4px;
-  }
-
-  .ready-actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
 </style>

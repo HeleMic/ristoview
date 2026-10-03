@@ -102,17 +102,19 @@ sei operativo. Con una chiave diversa da quella usata dall'altro telefono l'acce
 - **Lui** vede solo lo stato del regalo (non aperto, cosa ha scelto, sfruttato) e può timbrarlo dopo la cena.
   Dalle Impostazioni imposta il **soprannome** di lei e può **cancellare tutti i dati**.
 
-### Configurare il telefono di lei senza rovinare la sorpresa
+### La sorpresa sul telefono di lei
 
-La schermata "Vuoi venire a cena con me?" compare **solo sui dispositivi di lei** e **solo finché lei non ha premuto
-"Sì"**. Il flag `easterEggSeen` sta in `data.json`, quindi dopo il primo "Sì" non ricompare su nessun dispositivo.
+La schermata "Vuoi venire a cena con me?" compare **solo sui dispositivi di lei**, **subito dopo il primo accesso**, e
+ricompare a ogni apertura **finché lei non preme "Sì"**. Il flag `easterEggSeen` sta in `data.json`, quindi dopo il
+primo "Sì" non ricompare su nessun dispositivo.
 
 1. Sul tuo dispositivo, in **Impostazioni → Come chiamarla**, imposta il soprannome (salvato in `data.json` →
-   `settings.nickname`).
-2. Sul telefono di lei apri il sito (meglio: **Condividi → Aggiungi alla schermata Home**), scegli **Lei**, scrivi il
-   suo nome e incolla il **suo token**.
-3. Dopo l'accesso l'app mostra **"Tutto pronto"**: premi **Entra senza mostrarla** e chiudi. La sorpresa partirà la
-   prossima volta che lei apre l'app.
+   `settings.nickname`): la sorpresa lo usa.
+2. Mandale il link del sito, il suo token e (a parte) la chiave. Lei aggiunge il sito alla Home, sceglie **Lei**,
+   scrive nome, token e chiave e preme **Entra**: la sorpresa parte lì.
+
+Se il primo accesso sul suo telefono lo fai tu, alla schermata della sorpresa chiudi l'app senza toccare nulla:
+finché nessuno preme "Sì" la sorpresa resta intatta.
 
 ### Ricominciare da zero
 
