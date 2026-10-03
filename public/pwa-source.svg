@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <pattern id="s" width="64" height="64" patternUnits="userSpaceOnUse">
+      <rect width="64" height="64" fill="#fffafb"/>
+      <rect width="32" height="64" fill="#f4a7be"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="#fdeef2"/>
+  <rect x="141" y="234" width="230" height="160" rx="18" fill="#f4a7be"/>
+  <g fill="#fffafb">
+    <rect x="157" y="234" width="16" height="160"/><rect x="189" y="234" width="16" height="160"/>
+    <rect x="221" y="234" width="16" height="160"/><rect x="285" y="234" width="16" height="160"/>
+    <rect x="317" y="234" width="16" height="160"/><rect x="349" y="234" width="16" height="160"/>
+  </g>
+  <rect x="126" y="194" width="260" height="50" rx="14" fill="#f4a7be"/>
+  <g fill="#fffafb">
+    <rect x="142" y="194" width="16" height="50"/><rect x="174" y="194" width="16" height="50"/>
+    <rect x="206" y="194" width="16" height="50"/><rect x="302" y="194" width="16" height="50"/>
+    <rect x="334" y="194" width="16" height="50"/><rect x="366" y="194" width="16" height="50"/>
+  </g>
+  <rect x="236" y="194" width="40" height="200" fill="#b8235a"/>
+  <rect x="141" y="294" width="230" height="34" fill="#b8235a"/>
+  <path d="M250 190C220 135 155 135 165 170c5 25 55 25 85 25Z" fill="#b8235a"/>
+  <path d="M262 190C292 135 357 135 347 170c-5 25-55 25-85 25Z" fill="#b8235a"/>
+  <rect x="236" y="166" width="40" height="34" rx="12" fill="#8f1745"/>
+  <circle cx="256" cy="311" r="34" fill="#c9a15a" stroke="#8a6424" stroke-width="4"/>
+</svg>

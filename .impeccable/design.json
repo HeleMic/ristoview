@@ -1,0 +1,499 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T18:43:09+00:00",
+  "title": "Design System: ristoview",
+  "extensions": {
+    "colorMeta": {
+      "cocoa": {
+        "role": "primary",
+        "displayName": "Cocoa Ink",
+        "canonical": "#3e1f22",
+        "oklch": "oklch(28.3% 0.048 14.4)",
+        "tonalRamp": [
+          "#110809",
+          "#302021",
+          "#533b3c",
+          "#785759",
+          "#9b787a",
+          "#ba9d9e",
+          "#d9c3c4",
+          "#f9eaeb"
+        ]
+      },
+      "cocoa-deep": {
+        "role": "primary",
+        "displayName": "Bitter Cocoa",
+        "canonical": "#2c1517",
+        "oklch": "oklch(22.9% 0.038 14.9)",
+        "tonalRamp": [
+          "#100909",
+          "#2e2122",
+          "#4f3c3d",
+          "#735a5b",
+          "#967a7c",
+          "#b59fa0",
+          "#d6c4c5",
+          "#f7ebec"
+        ]
+      },
+      "ribbon": {
+        "role": "secondary",
+        "displayName": "Raspberry Ribbon",
+        "canonical": "#b8235a",
+        "oklch": "oklch(51.9% 0.186 5.1)",
+        "tonalRamp": [
+          "#1e0008",
+          "#48061f",
+          "#761538",
+          "#a92654",
+          "#d04d74",
+          "#e97f9a",
+          "#ffafc0",
+          "#ffdee9"
+        ]
+      },
+      "ribbon-deep": {
+        "role": "secondary",
+        "displayName": "Deep Raspberry",
+        "canonical": "#8f1745",
+        "oklch": "oklch(43.0% 0.156 4.5)",
+        "tonalRamp": [
+          "#1b0208",
+          "#430f20",
+          "#6f223a",
+          "#9f3657",
+          "#c55978",
+          "#e0879c",
+          "#f8b3c2",
+          "#ffe1ea"
+        ]
+      },
+      "gold": {
+        "role": "tertiary",
+        "displayName": "Seal Gold",
+        "canonical": "#c9a15a",
+        "oklch": "oklch(73.1% 0.101 80.5)",
+        "tonalRamp": [
+          "#120900",
+          "#322201",
+          "#563d0a",
+          "#7c5b18",
+          "#9f7c3d",
+          "#bda171",
+          "#dbc6a3",
+          "#fbedd6"
+        ]
+      },
+      "gold-deep": {
+        "role": "tertiary",
+        "displayName": "Seal Gold Rim",
+        "canonical": "#8a6424",
+        "oklch": "oklch(53.0% 0.093 77.0)",
+        "tonalRamp": [
+          "#120900",
+          "#322105",
+          "#563d13",
+          "#7c5a22",
+          "#9f7c45",
+          "#bda076",
+          "#dbc6a6",
+          "#fbecd8"
+        ]
+      },
+      "blush": {
+        "role": "neutral",
+        "displayName": "Blush",
+        "canonical": "#fdeef2",
+        "oklch": "oklch(96.2% 0.017 359.3)",
+        "tonalRamp": [
+          "#11080b",
+          "#2c2225",
+          "#4a3e42",
+          "#6a5d61",
+          "#8c7e82",
+          "#afa1a5",
+          "#d3c5c9",
+          "#f9eaee"
+        ]
+      },
+      "petal": {
+        "role": "neutral",
+        "displayName": "Petal",
+        "canonical": "#fbdde6",
+        "oklch": "oklch(92.5% 0.035 357.7)",
+        "tonalRamp": [
+          "#0f090b",
+          "#2d2125",
+          "#4e3d42",
+          "#715a61",
+          "#937b82",
+          "#b39fa5",
+          "#d4c4c9",
+          "#f6ebee"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Icing Paper",
+        "canonical": "#fffafb",
+        "oklch": "oklch(98.9% 0.005 3.3)",
+        "tonalRamp": [
+          "#0d0a0b",
+          "#282425",
+          "#454142",
+          "#646061",
+          "#858182",
+          "#a8a4a4",
+          "#ccc8c9",
+          "#f2edee"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Sugar Line",
+        "canonical": "#f1c9d5",
+        "oklch": "oklch(87.4% 0.048 358.2)",
+        "tonalRamp": [
+          "#11080b",
+          "#2f2025",
+          "#513b42",
+          "#765761",
+          "#997882",
+          "#b89da5",
+          "#d8c3c9",
+          "#f8eaee"
+        ]
+      },
+      "stripe": {
+        "role": "neutral",
+        "displayName": "Wrapping Stripe",
+        "canonical": "#f4a7be",
+        "oklch": "oklch(80.9% 0.095 360.0)",
+        "tonalRamp": [
+          "#16060b",
+          "#381a24",
+          "#5f3240",
+          "#884b5f",
+          "#ad6c80",
+          "#c994a3",
+          "#e6bcc8",
+          "#ffe6ed"
+        ]
+      },
+      "rose": {
+        "role": "neutral",
+        "displayName": "Rose",
+        "canonical": "#ee88a6",
+        "oklch": "oklch(74.4% 0.128 1.8)",
+        "tonalRamp": [
+          "#19040a",
+          "#3e1523",
+          "#682a3e",
+          "#95415c",
+          "#ba627d",
+          "#d58da1",
+          "#f0b8c6",
+          "#ffe3ec"
+        ]
+      },
+      "cocoa-soft": {
+        "role": "neutral",
+        "displayName": "Soft Cocoa",
+        "canonical": "#7a4a50",
+        "oklch": "oklch(46.6% 0.066 11.8)",
+        "tonalRamp": [
+          "#130709",
+          "#341e21",
+          "#58373b",
+          "#7f5358",
+          "#a37479",
+          "#c1999d",
+          "#dfc0c3",
+          "#fde9ea"
+        ]
+      },
+      "cocoa-mute": {
+        "role": "neutral",
+        "displayName": "Muted Cocoa",
+        "canonical": "#9c7076",
+        "oklch": "oklch(59.1% 0.056 9.9)",
+        "tonalRamp": [
+          "#120809",
+          "#321f22",
+          "#55393d",
+          "#7b555b",
+          "#9e767b",
+          "#bd9b9f",
+          "#dcc2c5",
+          "#fbeaeb"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "logotype": {
+        "displayName": "Logotype",
+        "purpose": "Shop logotype in the top bar and setup."
+      },
+      "moment": {
+        "displayName": "Moment",
+        "purpose": "Big script moments: the easter-egg question; same face on the gift seal and nickname."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section heads."
+      },
+      "entry": {
+        "displayName": "Entry",
+        "purpose": "Restaurant names on the counter, listino items."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text and inputs."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, legends, chips, meta lines."
+      },
+      "stamp": {
+        "displayName": "Stamp",
+        "purpose": "Printed state marks only (SFRUTTATO, expired)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-soft",
+        "value": "0 1px 2px rgb(62 31 34 / 0.06), 0 6px 18px -6px rgb(143 23 69 / 0.18)",
+        "purpose": "Paper rest: sheets, cards, listino, primary and ribbon buttons."
+      },
+      {
+        "name": "shadow-lift",
+        "value": "0 2px 4px rgb(62 31 34 / 0.08), 0 18px 40px -14px rgb(143 23 69 / 0.32)",
+        "purpose": "Box lift: gift box body, easter-egg card and main button."
+      },
+      {
+        "name": "band-glow",
+        "value": "0 4px 10px -6px rgb(143 23 69 / 0.35)",
+        "purpose": "Under the top-bar stripe band."
+      },
+      {
+        "name": "tab-shelf",
+        "value": "0 -1px 0 #f1c9d5, 0 -8px 24px -12px rgb(143 23 69 / 0.25)",
+        "purpose": "Phone bottom tab bar."
+      },
+      {
+        "name": "focus-glow",
+        "value": "0 0 0 3px rgb(184 35 90 / 0.18)",
+        "purpose": "Input focus, with raspberry border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Button press, ribbon untie, lid lift, stamp drop, row rise."
+      },
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Seal spin-in, listino check, paw tilt, dog peek."
+      },
+      {
+        "name": "press",
+        "value": "scale(0.97) over 160ms ease-out-expo",
+        "purpose": "Every button on active."
+      },
+      {
+        "name": "rise",
+        "value": "translateY(14px) to 0 with fade, 420-520ms, 28ms stagger",
+        "purpose": "Entry of listino items and the redeem card."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all animations and transitions to 1ms",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "listino-2col",
+        "value": "620px"
+      },
+      {
+        "name": "desktop",
+        "value": "900px"
+      }
+    ],
+    "patterns": [
+      {
+        "name": "stripes",
+        "value": "repeating-linear-gradient(90deg, #f4a7be 0 14px, #fffafb 14px 28px)",
+        "purpose": "Wrapping stripe: top band, gift box, big-moment frame."
+      },
+      {
+        "name": "lace-top",
+        "value": "radial-gradient(circle at 9px 9px, #fdeef2 2.4px, transparent 3px) 0 0 / 18px 18px repeat-x, radial-gradient(circle at 9px 18px, #fffafb 9px, transparent 9.5px) 0 0 / 18px 18px repeat-x",
+        "purpose": "Doily edge over the top of sheets, listino, redeem and easter-egg cards."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid #b8235a; outline-offset: 2px",
+        "purpose": "Global :focus-visible."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Cocoa pill for the main action of a screen.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Salva la cena</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:0;font-family:var(--font-sans,'Bricolage Grotesque Variable',system-ui,sans-serif);font-weight:650;font-size:16px;cursor:pointer;transition:transform 160ms cubic-bezier(0.16,1,0.3,1),background-color 160ms,box-shadow 160ms}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:3px solid #b8235a;outline-offset:2px}.ds-btn-primary{background:#3e1f22;color:#fffafb;box-shadow:0 1px 2px rgb(62 31 34 / 0.06),0 6px 18px -6px rgb(143 23 69 / 0.18)}.ds-btn-primary:hover{background:#2c1517}"
+    },
+    {
+      "name": "Ribbon Button",
+      "kind": "button",
+      "refersTo": "button-ribbon",
+      "description": "Raspberry pill for the one signature move (untie, confirm).",
+      "html": "<button class=\"ds-btn-ribbon\">Sciogli il fiocco</button>",
+      "css": ".ds-btn-ribbon{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;border:0;background:#b8235a;color:#fff;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-weight:650;font-size:16px;cursor:pointer;box-shadow:0 1px 2px rgb(62 31 34 / 0.06),0 6px 18px -6px rgb(143 23 69 / 0.18);transition:transform 160ms cubic-bezier(0.16,1,0.3,1),background-color 160ms}.ds-btn-ribbon:hover{background:#8f1745}.ds-btn-ribbon:active{transform:scale(0.97)}.ds-btn-ribbon:focus-visible{outline:3px solid #b8235a;outline-offset:2px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent pill with a sugar-line ring for secondary actions.",
+      "html": "<button class=\"ds-btn-ghost\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 17h16M6 17a6 6 0 0 1 12 0M12 8V6\"/></svg>Rileggi Sushi Ya</button>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:0;background:transparent;color:#3e1f22;box-shadow:inset 0 0 0 1.5px #f1c9d5;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-weight:650;font-size:16px;cursor:pointer;transition:background-color 160ms,transform 160ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-ghost:hover{background:#fbdde6}.ds-btn-ghost:active{transform:scale(0.97)}.ds-btn-ghost:focus-visible{outline:3px solid #b8235a;outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Paper field with sugar-line border and raspberry focus glow.",
+      "html": "<label class=\"ds-field\"><span>Nome del ristorante</span><input class=\"ds-input\" placeholder=\"Es. Sushi Ya\"><small>Solo il nome è obbligatorio.</small></label>",
+      "css": ".ds-field{display:grid;gap:6px;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;color:#3e1f22}.ds-field>span{font-size:14px;font-weight:650;color:#7a4a50}.ds-field small{font-size:13px;color:#7a4a50}.ds-input{min-height:48px;padding:11px 14px;border-radius:12px;border:1.5px solid #f1c9d5;background:#fffafb;font:inherit;font-size:16px;color:#3e1f22;transition:border-color 140ms,box-shadow 140ms}.ds-input::placeholder{color:#9c7076}.ds-input:hover{border-color:#f4a7be}.ds-input:focus{outline:none;border-color:#b8235a;box-shadow:0 0 0 3px rgb(184 35 90 / 0.18)}"
+    },
+    {
+      "name": "Tab Bar",
+      "kind": "nav",
+      "refersTo": "tab-active",
+      "description": "Phone bottom tabs; raspberry current with petal pill; cocoa center add tab.",
+      "html": "<nav class=\"ds-tabbar\"><a class=\"on\" href=\"#\"><span class=\"i\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><rect x=\"3\" y=\"8\" width=\"18\" height=\"13\" rx=\"1\"/><path d=\"M12 8v13M3 12h18M12 8c-2-4-6-4-6-1s6 1 6 1c2-4 6-4 6-1s-6 1-6 1\"/></svg></span>Regalo</a><a href=\"#\"><span class=\"i\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M3 18h18M5 18a7 7 0 0 1 14 0M12 9V7\"/></svg></span>Ristoranti</a><a class=\"main\" href=\"#\"><span class=\"i\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg></span>Nuova cena</a><a href=\"#\"><span class=\"i\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M4 7h16M4 17h16\"/><circle cx=\"9\" cy=\"7\" r=\"2\"/><circle cx=\"15\" cy=\"17\" r=\"2\"/></svg></span>Impostazioni</a></nav>",
+      "css": ".ds-tabbar{display:grid;grid-template-columns:repeat(4,1fr);padding:6px;background:rgb(255 250 251 / 0.94);backdrop-filter:blur(10px);box-shadow:0 -1px 0 #f1c9d5,0 -8px 24px -12px rgb(143 23 69 / 0.25);font-family:'Bricolage Grotesque Variable',system-ui,sans-serif}.ds-tabbar a{display:grid;justify-items:center;gap:2px;padding:6px 2px;border-radius:14px;color:#9c7076;font-size:12px;font-weight:650;text-decoration:none}.ds-tabbar a:hover{color:#3e1f22}.ds-tabbar a:focus-visible{outline:3px solid #b8235a;outline-offset:2px}.ds-tabbar .i{display:grid;place-items:center;width:44px;height:30px;border-radius:999px;transition:background-color 160ms}.ds-tabbar a.on{color:#b8235a}.ds-tabbar a.on .i{background:#fbdde6}.ds-tabbar a.main .i{background:#3e1f22;color:#fffafb}"
+    },
+    {
+      "name": "Cuisine Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Petal pill naming the cuisine.",
+      "html": "<span class=\"ds-chip\">Giapponese</span>",
+      "css": ".ds-chip{display:inline-block;padding:2px 10px;border-radius:999px;background:#fbdde6;color:#8f1745;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-size:14px;font-weight:650}"
+    },
+    {
+      "name": "Ruled Sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "One lace-topped paper sheet with dashed ruled sections for forms and settings.",
+      "html": "<div class=\"ds-sheet\"><section><strong>La cena</strong><span>Sushi Ya, 3 ottobre</span></section><section><strong>Il conto</strong><span>62 euro in due</span></section></div>",
+      "css": ".ds-sheet{position:relative;margin-top:12px;padding:26px 18px 8px;border-radius:4px 4px 14px 14px;background:#fffafb;box-shadow:0 1px 2px rgb(62 31 34 / 0.06),0 6px 18px -6px rgb(143 23 69 / 0.18);font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;color:#3e1f22}.ds-sheet::before{content:'';position:absolute;left:0;right:0;top:-9px;height:18px;background:radial-gradient(circle at 9px 9px,#fdeef2 2.4px,transparent 3px) 0 0/18px 18px repeat-x,radial-gradient(circle at 9px 18px,#fffafb 9px,transparent 9.5px) 0 0/18px 18px repeat-x}.ds-sheet section{display:grid;gap:6px;padding:18px 0 22px;border-top:1.5px dashed #f1c9d5}.ds-sheet section:first-child{border-top:0;padding-top:4px}.ds-sheet span{color:#7a4a50;font-size:14px}"
+    },
+    {
+      "name": "Counter Ticket",
+      "kind": "custom",
+      "refersTo": "counter-stub",
+      "description": "A dinner entry: perforated N° stub, name and meta, score seal.",
+      "html": "<ol class=\"ds-counter\"><li><a href=\"#\"><span class=\"stub\">N° 012</span><span class=\"main\"><span class=\"name\">Sushi Ya</span><span class=\"meta\">Giapponese · 3 ott</span></span><span class=\"seal\">4,7</span></a></li><li><a href=\"#\"><span class=\"stub\">N° 011</span><span class=\"main\"><span class=\"name\">Da Gino</span><span class=\"meta\">Pizzeria · 26 set · 3 volte</span></span><span class=\"seal pink\">3,8</span></a></li></ol>",
+      "css": ".ds-counter{list-style:none;margin:0;padding:0;border-top:2px solid #3e1f22;border-bottom:2px solid #3e1f22;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;color:#3e1f22}.ds-counter li+li{border-top:1.5px dashed #f1c9d5}.ds-counter a{display:flex;align-items:center;gap:14px;min-height:68px;padding:8px 8px 8px 0;color:inherit;text-decoration:none;transition:background-color 160ms}.ds-counter a:hover{background:#fbdde6}.ds-counter a:focus-visible{outline:3px solid #b8235a;outline-offset:2px}.ds-counter .stub{align-self:stretch;display:grid;place-items:center;width:62px;border-right:2px dotted #f4a7be;font-size:13px;font-weight:750;color:#b8235a;font-variant-numeric:tabular-nums}.ds-counter .main{flex:1;display:grid;gap:1px}.ds-counter .name{font-size:18px;font-weight:720;line-height:1.25}.ds-counter .meta{font-size:14px;color:#7a4a50}.ds-counter .seal{--bg:#c9a15a;--rim:#8a6424;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-weight:780;font-size:15px;background:radial-gradient(circle,var(--bg) 60%,transparent 61%),repeating-conic-gradient(var(--rim) 0 6deg,var(--bg) 6deg 12deg)}.ds-counter .seal.pink{--bg:#f4a7be;--rim:#ee88a6}"
+    },
+    {
+      "name": "Paw Rating",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Five paw prints; raspberry filled, sugar-line empty, chosen paw tilts.",
+      "html": "<div class=\"ds-paws\"><button aria-label=\"1 su 5\" class=\"on\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\"><ellipse cx=\"16\" cy=\"21.5\" rx=\"7.2\" ry=\"6\"/><ellipse cx=\"7.6\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(-18 7.6 13.6)\"/><ellipse cx=\"12.6\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(-6 12.6 8.4)\"/><ellipse cx=\"19.4\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(6 19.4 8.4)\"/><ellipse cx=\"24.4\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(18 24.4 13.6)\"/></svg></button><button aria-label=\"2 su 5\" class=\"on\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\"><ellipse cx=\"16\" cy=\"21.5\" rx=\"7.2\" ry=\"6\"/><ellipse cx=\"7.6\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(-18 7.6 13.6)\"/><ellipse cx=\"12.6\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(-6 12.6 8.4)\"/><ellipse cx=\"19.4\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(6 19.4 8.4)\"/><ellipse cx=\"24.4\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(18 24.4 13.6)\"/></svg></button><button aria-label=\"3 su 5\" class=\"on\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\"><ellipse cx=\"16\" cy=\"21.5\" rx=\"7.2\" ry=\"6\"/><ellipse cx=\"7.6\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(-18 7.6 13.6)\"/><ellipse cx=\"12.6\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(-6 12.6 8.4)\"/><ellipse cx=\"19.4\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(6 19.4 8.4)\"/><ellipse cx=\"24.4\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(18 24.4 13.6)\"/></svg></button><button aria-label=\"4 su 5\" class=\"on\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\"><ellipse cx=\"16\" cy=\"21.5\" rx=\"7.2\" ry=\"6\"/><ellipse cx=\"7.6\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(-18 7.6 13.6)\"/><ellipse cx=\"12.6\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(-6 12.6 8.4)\"/><ellipse cx=\"19.4\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(6 19.4 8.4)\"/><ellipse cx=\"24.4\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(18 24.4 13.6)\"/></svg></button><button aria-label=\"5 su 5\" class=\"\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 32 32\"><ellipse cx=\"16\" cy=\"21.5\" rx=\"7.2\" ry=\"6\"/><ellipse cx=\"7.6\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(-18 7.6 13.6)\"/><ellipse cx=\"12.6\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(-6 12.6 8.4)\"/><ellipse cx=\"19.4\" cy=\"8.4\" rx=\"2.9\" ry=\"3.7\" transform=\"rotate(6 19.4 8.4)\"/><ellipse cx=\"24.4\" cy=\"13.6\" rx=\"2.9\" ry=\"3.6\" transform=\"rotate(18 24.4 13.6)\"/></svg></button><span>Molto buono</span></div>",
+      "css": ".ds-paws{display:flex;align-items:center;gap:2px;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif}.ds-paws button{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:12px;background:none;cursor:pointer;padding:0}.ds-paws svg{fill:#f1c9d5;transition:fill 160ms,transform 260ms cubic-bezier(0.22,1,0.36,1)}.ds-paws button:hover svg{fill:#f4a7be}.ds-paws button.on svg{fill:#b8235a}.ds-paws button:nth-child(4) svg{transform:scale(1.18) rotate(-8deg)}.ds-paws button:focus-visible{outline:3px solid #b8235a;outline-offset:-2px}.ds-paws span{margin-left:10px;font-size:14px;color:#7a4a50}"
+    },
+    {
+      "name": "Redeemed Stamp",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Inked SFRUTTATO state mark (the app roughens it with the #stamp-ink SVG filter).",
+      "html": "<span class=\"ds-stamp\">Sfruttato</span>",
+      "css": ".ds-stamp{display:inline-block;margin:24px;padding:6px 16px 4px;border:4px double #8f1745;border-radius:10px;color:#8f1745;background:rgb(255 250 251 / 0.72);font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-size:30px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;transform:rotate(-14deg)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La pasticceria della domenica",
+    "overview": "The app is a Sunday pastry shop seen from the customer's side of the counter. The monthly gift is a pink-and-white striped package tied with a raspberry ribbon, sitting on a paper doily; the diary is the shop's counter, where every dinner is a numbered ticket. Everything else is paper: blush ground, near-white sheets with lace edges, cocoa-brown ink. The world is committed pink, but the ink is chocolate, so the screen reads warm and legible rather than sugary.\n\nDensity is phone-first and calm: one column, 16px gutters, 48px touch targets, a bottom tab bar on phones and top tabs from 900px. Decoration lives in the world's own materials (stripe, ribbon, lace, seal, rubber stamp, paw prints, two drawn dogs) and never in generic UI chrome. States are printed marks: a gold seal for the chosen gift, an inked double-bordered SFRUTTATO stamp for redeemed, a struck line for expired.\n\nMotion is short and settling: expo-out easings, a stamp that drops from 2.2x and lands rotated, a seal that spins in, list rows that rise 14px on entry. All of it collapses to 1ms under reduced motion.",
+    "keyCharacteristics": [
+      "Pink-and-white wrapping stripe (14px bands) on the header band, the gift box, and the frame of big moments only.",
+      "Cocoa ink for text and primary actions; raspberry ribbon for the signature move, active state, and focus.",
+      "Gold scalloped seals for chosen and top-scored states.",
+      "Paper sheets with a lace (doily) top edge and dashed ruled sections.",
+      "Counter-ticket list rows with a perforated N° stub.",
+      "Paw prints, not stars, for every rating.",
+      "Yellowtail script reserved for the logotype, the gift seal, the nickname and the big moments."
+    ],
+    "rules": [
+      {
+        "name": "The Chocolate Ink Rule",
+        "body": "Text and primary actions are cocoa, never pink. Pink is the ground and the wrapping; it does not carry words.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ribbon Rule",
+        "body": "Raspberry is the ribbon: it marks the one signature move on a screen, focus, and the active place. If two ribbon buttons compete on one screen, one of them is cocoa or ghost.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gold Means Chosen Rule",
+        "body": "Gold appears only as a seal or a seal-like mark for a chosen or top-rated state. It is never a decorative accent or a button fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Shop Sign Rule",
+        "body": "Yellowtail is for the logotype, the gift seal, the nickname and the easter-egg question. Every heading, label and control is Bricolage.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ink Stamp Rule",
+        "body": "Uppercase tracked type exists only as a printed state mark (stamp or expired mark). It is never a label above a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sixteen Rule",
+        "body": "Inputs never go below 16px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tinted Shadow Rule",
+        "body": "Shadows are soft, blurred and tinted with cocoa and raspberry; never neutral grey and never hard offsets.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the 14px pink-and-white stripe only as wrapping: the top bar band, the gift box, and the frame of a big moment.",
+      "Do set text and primary actions in cocoa (#3e1f22), and reserve raspberry (#b8235a) for the one signature action, focus, links and the active place.",
+      "Do show states as printed marks: gold seal for chosen, inked SFRUTTATO stamp for redeemed, a struck line for expired.",
+      "Do give every rating five paw prints with 44px targets, and let a second tap clear it.",
+      "Do put forms and settings on a single lace-topped paper sheet with dashed ruled sections.",
+      "Do list restaurants as counter tickets with a perforated N° stub and a ScoreSeal.",
+      "Do use tinted soft shadows (paper rest, box lift) and pill-shaped buttons.",
+      "Do keep inputs at 16px and touch targets at 44px or more."
+    ],
+    "donts": [
+      "Don't use stars, hearts or numeric bars for ratings.",
+      "Don't set headings, labels or buttons in Yellowtail; it is the shop sign, not a voice.",
+      "Don't put a small uppercase label above a heading; uppercase tracked type is reserved for stamp marks.",
+      "Don't stripe sheets, cards or list rows; content sits on plain paper.",
+      "Don't use gold as a decorative accent or button fill.",
+      "Don't use neutral grey or hard offset shadows.",
+      "Don't add a floating action button; \"Nuova cena\" lives in the tab bar."
+    ]
+  }
+}

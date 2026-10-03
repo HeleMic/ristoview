@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <pattern id="s" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="10" height="10" fill="#fffafb"/>
+      <rect width="5" height="10" fill="#f4a7be"/>
+    </pattern>
+  </defs>
+  <rect x="9" y="26" width="46" height="32" rx="4" fill="url(#s)"/>
+  <rect x="6" y="18" width="52" height="10" rx="3" fill="url(#s)"/>
+  <rect x="28" y="18" width="8" height="40" fill="#b8235a"/>
+  <rect x="9" y="38" width="46" height="7" fill="#b8235a"/>
+  <path d="M31 17C25 6 12 6 14 13c1 5 11 5 17 5Z" fill="#b8235a"/>
+  <path d="M33 17C39 6 52 6 50 13c-1 5-11 5-17 5Z" fill="#b8235a"/>
+  <rect x="28" y="13" width="8" height="7" rx="2.5" fill="#8f1745"/>
+  <circle cx="32" cy="41.5" r="7" fill="#c9a15a" stroke="#8a6424" stroke-width="1"/>
+</svg>
